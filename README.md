@@ -1,5 +1,10 @@
 # shoppinglist-client
 
+!!!
+https://github.com/marmelab/react-admin
+https://marmelab.com/react-admin/Tutorial.html
+
+
 ## Installation
 
 Install the application dependencies by running:
