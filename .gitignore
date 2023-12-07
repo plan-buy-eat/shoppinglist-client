@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 # src/users.json
 .env
-# .yarn/install-state.gz
+.yarn/install-state.gz
