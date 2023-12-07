@@ -14,7 +14,8 @@ chore:
     - any-glob-to-any-file: ['*', '.github/**/*']
 
 docs:
-  - /**/README*
+  - changed-files:
+    - any-glob-to-any-file: ['/**/README*']
 
 devops:
   - changed-files:
