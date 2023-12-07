@@ -4,7 +4,7 @@ chore:
   - .github/**/*
 
 docs:
-  - docs/**/*
+  - /**/README*
 
 devops:
   - cmds/**/*
