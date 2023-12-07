@@ -1,21 +1,30 @@
 # https://github.com/actions/labeler
 chore:
-  - '*'
-  - .github/**/*
+  - changed-files:
+    - any-glob-to-any-file: ['*', '.github/**/*']
 
 docs:
   - /**/README*
 
 devops:
-  - cmds/**/*
-  - devops/**/*
+  - changed-files:
+    - any-glob-to-any-file: ['devops/**/*']
 
 frontend:
-  - '**/*.js'
-  - '**/*.ts'
-  - '**/*.tsx'
+  - changed-files:
+    - any-glob-to-any-file: ['**/*.js', '**/*.ts', '**/*.tsx']
 
 backend:
-  - '**/*.go'
-  - '**/go.mod'
-  - '**/go.sum'
+  - changed-files:
+    - any-glob-to-any-file: ['**/go.sum', '**/*.go', '**/go.mod']
+
+release:
+ - base-branch: 'main'
+
+dev-branch:
+ - base-branch: 'dev'
+
+source:
+- all:
+  - changed-files:
+    - any-glob-to-any-file: 'src/**/*'
