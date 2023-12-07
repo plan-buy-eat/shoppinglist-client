@@ -1,0 +1,21 @@
+# https://github.com/actions/labeler
+chore:
+  - '*'
+  - .github/**/*
+
+docs:
+  - docs/**/*
+
+devops:
+  - cmds/**/*
+  - devops/**/*
+
+frontend:
+  - '**/*.js'
+  - '**/*.ts'
+  - '**/*.tsx'
+
+backend:
+  - '**/*.go'
+  - '**/go.mod'
+  - '**/go.sum'
