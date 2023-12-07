@@ -1,5 +1,7 @@
 # shoppinglist-client
 
+[![GitHub Super-Linter](https://github.com/plan-buy-eat/shoppinglist-client//actions/workflows/linter.yaml/badge.svg)](https://github.com/marketplace/actions/super-linter)
+
 !!!
 https://github.com/marmelab/react-admin
 https://marmelab.com/react-admin/Tutorial.html
