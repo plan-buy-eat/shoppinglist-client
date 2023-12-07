@@ -1,6 +1,6 @@
 # shoppinglist-client
 
-[![GitHub Super-Linter](https://github.com/plan-buy-eat/shoppinglist-client//actions/workflows/linter.yaml/badge.svg)](https://github.com/marketplace/actions/super-linter)
+[![GitHub Super-Linter](https://github.com/plan-buy-eat/shoppinglist-client/actions/workflows/linter.yaml/badge.svg)](https://github.com/marketplace/actions/super-linter)
 
 ## Installation
 
