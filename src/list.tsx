@@ -1,19 +1,41 @@
 import { useMediaQuery, Theme } from "@mui/material";
-import { List, SimpleList, Datagrid, TextField, EmailField, UrlField } from "react-admin";
+import { InfiniteList, Datagrid, TextField, EmailField, TextInput, UrlField } from "react-admin";
+
+const postFilters = [
+    <TextInput key="q" source="q" label="Search" alwaysOn />,
+];
+
+const CheckField = () => <span><input className="" type="checkbox"></input></span>;
+CheckField.defaultProps = { label: 'Selected' };
+
+function getRandomInt(ceil: number) {
+  return Math.floor(Math.random() * ceil);
+}
+  
+const postRowSx = (record, index) => {
+    return ({ textDecoration: getRandomInt(2)? 'line-through' : '' });
+};
 
 export const DataList = () => {
     const isSmall = useMediaQuery<Theme>((theme) => theme.breakpoints.down("sm"));
     return (
-        <List>
+        <InfiniteList filters={postFilters}>
             {isSmall ? (
-                <SimpleList 
-                    primaryText={(record) => record.name}
-                    secondaryText={(record) => record.username}
-                    tertiaryText={(record) => record.email}
-                />
-            ) : (
-                <Datagrid rowClick="edit">
+                <Datagrid 
+                    rowClick="toggleSelection"
+                    rowSx={postRowSx}
+                >
                     <TextField source="id" />
+                    <CheckField label="Bought" />
+                    <TextField source="name" />
+                </Datagrid>
+            ) : (
+                <Datagrid 
+                    rowClick="toggleSelection"
+                    rowSx={postRowSx}
+                >
+                    <TextField source="id" />
+                    <CheckField label="Bought" />
                     <TextField source="name" />
                     <TextField source="username" />
                     <EmailField source="email" />
@@ -23,6 +45,6 @@ export const DataList = () => {
                     <TextField source="company.name" />
                 </Datagrid>
             )}
-        </List>
+        </InfiniteList>
     );
 };
