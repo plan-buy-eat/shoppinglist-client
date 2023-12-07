@@ -31,6 +31,5 @@ dev-branch:
  - base-branch: 'dev'
 
 source:
-- all:
   - changed-files:
     - any-glob-to-any-file: 'src/**/*'
