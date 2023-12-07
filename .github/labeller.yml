@@ -1,4 +1,14 @@
 # https://github.com/actions/labeler
+
+root:
+- changed-files:
+  - any-glob-to-any-file: '*'
+
+# Add 'anychange' label to any changes within the entire repository
+anychange:
+- changed-files:
+  - any-glob-to-any-file: '**'
+
 chore:
   - changed-files:
     - any-glob-to-any-file: ['*', '.github/**/*']
