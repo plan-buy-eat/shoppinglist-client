@@ -6,5 +6,5 @@ A prototype of shopping list client
 Deployed to CloudFlare Pages [here](https://shoppinglist.turevskiy.kharkiv.ua)
 
 ## links
-[first](https://github.com/marmelab/react-adminhttps://github.com/marmelab/react-admin)
+[first](https://github.com/marmelab/react-admin)
 [second](https://marmelab.com/react-admin/Tutorial.html)

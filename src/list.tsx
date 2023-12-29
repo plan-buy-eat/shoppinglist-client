@@ -1,5 +1,5 @@
 import { useMediaQuery, Theme } from "@mui/material";
-import { InfiniteList, Datagrid, TextField, EmailField, TextInput, UrlField } from "react-admin";
+import {InfiniteList, Datagrid, TextField, EmailField, TextInput, UrlField, useListContext} from "react-admin";
 
 const postFilters = [
     <TextInput key="q" source="q" label="Search" alwaysOn />,
@@ -12,8 +12,12 @@ function getRandomInt(ceil: number) {
   return Math.floor(Math.random() * ceil);
 }
   
-const postRowSx = (record, index) => {
-    return ({ textDecoration: getRandomInt(2)? 'line-through' : '' });
+const postRowSx = (record, index)=> {
+    const { selectedIds } = useListContext();
+    if (selectedIds.includes(record.id)) {
+        return ({ textDecoration: 'line-through' });
+    }
+    return ({ textDecoration: '' });
 };
 
 export const DataList = () => {
@@ -37,12 +41,12 @@ export const DataList = () => {
                     <TextField source="id" />
                     <CheckField label="Bought" />
                     <TextField source="name" />
-                    <TextField source="username" />
-                    <EmailField source="email" />
-                    <TextField source="address.street" />
-                    <TextField source="phone" />
-                    <UrlField source="website" />
-                    <TextField source="company.name" />
+                    {/*<TextField source="username" />*/}
+                    {/*<EmailField source="email" />*/}
+                    {/*<TextField source="address.street" />*/}
+                    {/*<TextField source="phone" />*/}
+                    {/*<UrlField source="website" />*/}
+                    {/*<TextField source="company.name" />*/}
                 </Datagrid>
             )}
         </InfiniteList>
