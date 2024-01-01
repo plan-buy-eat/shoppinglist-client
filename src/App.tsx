@@ -9,6 +9,7 @@ import { OLayout } from './OLayout';
 
 export const App = () => (
   <Admin dataProvider={dataProvider} authProvider={authProvider}  layout={OLayout}>
-    <Resource name="users" list={DataList} />
+    <Resource name="items" list={DataList} />
+      {/*<Resource name="users" list={DataList} />*/}
   </Admin>
 );
