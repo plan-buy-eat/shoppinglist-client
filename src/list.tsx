@@ -8,10 +8,6 @@ const postFilters = [
 const CheckField = () => <span><input className="" type="checkbox"></input></span>;
 CheckField.defaultProps = { label: 'Selected' };
 
-function getRandomInt(ceil: number) {
-  return Math.floor(Math.random() * ceil);
-}
-  
 const postRowSx = (record, index)=> {
     const { selectedIds } = useListContext();
     if (selectedIds.includes(record.id)) {
@@ -38,15 +34,12 @@ export const DataList = () => {
                     rowClick="toggleSelection"
                     rowSx={postRowSx}
                 >
-                    <TextField source="id" />
+                    {/*<TextField source="id" />*/}
                     <CheckField label="Bought" />
-                    <TextField source="name" />
-                    {/*<TextField source="username" />*/}
-                    {/*<EmailField source="email" />*/}
-                    {/*<TextField source="address.street" />*/}
-                    {/*<TextField source="phone" />*/}
-                    {/*<UrlField source="website" />*/}
-                    {/*<TextField source="company.name" />*/}
+                    <TextField source="title" />
+                    <TextField source="amount" />
+                    <TextField source="unit" />
+                    <TextField source="shop" />
                 </Datagrid>
             )}
         </InfiniteList>
