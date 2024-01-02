@@ -28,7 +28,6 @@ export const DataList = () => {
                         rowClick="toggleSelection"
                         rowSx={getPostRowSx(selectedIds)}
                     >
-                        <TextField source="id"/>
                         <CheckField label="Bought"/>
                         <TextField source="name"/>
                     </Datagrid>
