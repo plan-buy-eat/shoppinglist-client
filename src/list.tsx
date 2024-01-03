@@ -27,7 +27,6 @@ export const DataList = () => {
                     <Datagrid
                         rowClick="toggleSelection"
                         rowSx={getPostRowSx(selectedIds)}
-                        bulkActionButtons={false}
                     >
                         {/*<CheckField label="Bought"/>*/}
                         <TextField source="name"/>
@@ -36,7 +35,6 @@ export const DataList = () => {
                     <Datagrid
                         rowClick="toggleSelection"
                         rowSx={getPostRowSx(selectedIds)}
-                        bulkActionButtons={false}
                     >
                         {/*<TextField source="id" />*/}
                         {/*<CheckField label="Bought"/>*/}
