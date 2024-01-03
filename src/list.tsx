@@ -21,7 +21,7 @@ const getPostRowSx = (selectedIds: any[])=> {
 export const DataList = () => {
     const isSmall = useMediaQuery<Theme>((theme) => theme.breakpoints.down("sm"));
     return (
-        <InfiniteList filters={postFilters}>
+        <InfiniteList filters={postFilters} perPage={10}>
             <WithListContext render={({ selectedIds }) =>
                 isSmall ? (
                     <Datagrid
