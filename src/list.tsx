@@ -12,9 +12,9 @@ CheckField.defaultProps = { label: 'Selected' };
 const getPostRowSx = (selectedIds: any[])=> {
     return (record: any/*, index: number*/) => {
         if (selectedIds.includes(record.id)) {
-            return ({textDecoration: 'line-through'});
+            return ({textDecoration: 'line-through', fontStyle: 'italic'});
         }
-        return ({textDecoration: ''});
+        return ({});
     };
 }
 
@@ -27,17 +27,19 @@ export const DataList = () => {
                     <Datagrid
                         rowClick="toggleSelection"
                         rowSx={getPostRowSx(selectedIds)}
+                        bulkActionButtons={false}
                     >
-                        <CheckField label="Bought"/>
+                        {/*<CheckField label="Bought"/>*/}
                         <TextField source="name"/>
                     </Datagrid>
                 ) : (
                     <Datagrid
                         rowClick="toggleSelection"
                         rowSx={getPostRowSx(selectedIds)}
+                        bulkActionButtons={false}
                     >
                         {/*<TextField source="id" />*/}
-                        <CheckField label="Bought"/>
+                        {/*<CheckField label="Bought"/>*/}
                         <TextField source="title"/>
                         <TextField source="amount"/>
                         <TextField source="unit"/>
