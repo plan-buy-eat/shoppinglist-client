@@ -29,7 +29,7 @@ export const DataList = () => {
                         rowSx={getPostRowSx(selectedIds)}
                     >
                         {/*<CheckField label="Bought"/>*/}
-                        <TextField source="name"/>
+                        <TextField source="title"/>
                     </Datagrid>
                 ) : (
                     <Datagrid
