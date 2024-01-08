@@ -1,13 +1,21 @@
 import { useMediaQuery, Theme } from "@mui/material";
-import {InfiniteList, Datagrid, TextField, TextInput} from "react-admin";
+import {InfiniteList, Datagrid, TextField, TextInput, BulkDeleteButton} from "react-admin";
 import { WithListContext } from 'react-admin';
+import { Save } from '@mui/icons-material';
 
 const postFilters = [
     <TextInput name="q" key="q" source="q" label="Search" alwaysOn />,
 ];
 
-const CheckField = () => <span><input className="" type="checkbox"></input></span>;
-CheckField.defaultProps = { label: 'Selected' };
+// const CheckField = () => <span><input className="" type="checkbox"></input></span>;
+// CheckField.defaultProps = { label: 'Selected' };
+
+const PostBulkActionButtons = () => (
+    <>
+        {/* default bulk delete action */}
+        <BulkDeleteButton label="Save" icon={<Save/>} />
+    </>
+);
 
 const getPostRowSx = (selectedIds: any[])=> {
     return (record: any/*, index: number*/) => {
@@ -25,14 +33,17 @@ export const DataList = () => {
             <WithListContext render={({ selectedIds }) =>
                 isSmall ? (
                     <Datagrid
+                        bulkActionButtons={<PostBulkActionButtons />}
                         rowClick="toggleSelection"
                         rowSx={getPostRowSx(selectedIds)}
                     >
                         {/*<CheckField label="Bought"/>*/}
                         <TextField source="title"/>
+                        <TextField source="amount"/>
                     </Datagrid>
                 ) : (
                     <Datagrid
+                        bulkActionButtons={<PostBulkActionButtons />}
                         rowClick="toggleSelection"
                         rowSx={getPostRowSx(selectedIds)}
                     >
