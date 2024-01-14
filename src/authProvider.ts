@@ -1,51 +1,26 @@
-import { AuthProvider, HttpError } from "react-admin";
-import data from "./users.json";
 
-/**
- * This authProvider is only for test purposes. Don't use it in production.
- */
-export const authProvider: AuthProvider = {
-  constructor(message: string) {
-    this.greeting = message;
-  },
-  login: ({ username, password }) => {
-    const user = data.users.find(
-      (u) => {
-        let upassword = u.password;
-        if (upassword === null || upassword === undefined) {
-          upassword = import.meta.env.VITE_PASSWORD;
-        }
-        return u.username === username && upassword === password;
-      })
-    if (user) {
-      // eslint-disable-next-line no-unused-vars
-      let { password, ...userToPersist } = user;
-      localStorage.setItem("user", JSON.stringify(userToPersist));
-      return Promise.resolve();
-    }
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import {
+  FirebaseAuthProvider,
+} from 'react-admin-firebase';
+import {ReactAdminFirebaseAuthProvider} from "react-admin-firebase/dist/providers/AuthProvider";
 
-    return Promise.reject(
-      new HttpError("Unauthorized", 401, {
-        message: "Invalid username or password",
-      })
-    );
-  },
-  logout: () => {
-    localStorage.removeItem("user");
-    return Promise.resolve();
-  },
-  checkError: () => Promise.resolve(),
-  checkAuth: () =>
-    localStorage.getItem("user") ? Promise.resolve() : Promise.reject(),
-  getPermissions: () => {
-    return Promise.resolve(undefined);
-  },
-  getIdentity: () => {
-    const persistedUser = localStorage.getItem("user");
-    const user = persistedUser ? JSON.parse(persistedUser) : null;
+console.log(import.meta.env.VITE_FIREBASE_CONFIG)
 
-    return Promise.resolve(user);
-  },
-};
+const config = JSON.parse(import.meta.env.VITE_FIREBASE_CONFIG);
+
+// const webClientId = import.meta.env.VITE_FIREBASE_AUTH_WEBCLIENTID
+// const webClientSecret = import.meta.env.VITE_FIREBASE_AUTH_WEBCLIENTSECRET
+
+// Initialize Firebase
+// eslint-disable-next-line no-unused-vars
+const app = initializeApp(config);
+// eslint-disable-next-line no-unused-vars
+const analytics = getAnalytics(app);
+
+const options = {};
+
+export const authProvider : ReactAdminFirebaseAuthProvider = FirebaseAuthProvider(config, options);
 
 export default authProvider;
