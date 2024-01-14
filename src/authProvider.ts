@@ -6,8 +6,6 @@ import {
 } from 'react-admin-firebase';
 import {ReactAdminFirebaseAuthProvider} from "react-admin-firebase/dist/providers/AuthProvider";
 
-console.log(import.meta.env.VITE_FIREBASE_CONFIG)
-
 const config = JSON.parse(import.meta.env.VITE_FIREBASE_CONFIG);
 
 // const webClientId = import.meta.env.VITE_FIREBASE_AUTH_WEBCLIENTID
