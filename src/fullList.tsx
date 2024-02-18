@@ -19,14 +19,14 @@ const PostBulkActionButtons = () => (
 
 const getPostRowSx = (selectedIds: any[])=> {
     return (record: any/*, index: number*/) => {
-        if (selectedIds.includes(record.id)) {
+        if (record.bought === true) {
             return ({textDecoration: 'line-through', fontStyle: 'italic'});
         }
         return ({});
     };
 }
 
-export const DataList = () => {
+export const FullDataList = () => {
     const isSmall = useMediaQuery<Theme>((theme) => theme.breakpoints.down("sm"));
     return (
         <List filters={postFilters} perPage={10}>
@@ -38,7 +38,6 @@ export const DataList = () => {
                         rowClick="toggleSelection"
                         rowSx={getPostRowSx(selectedIds)}
                     >
-                        {/*<CheckField label="Bought"/>*/}
                         <TextField source="title"/>
                         <TextField source="amount"/>
                     </Datagrid>
@@ -49,7 +48,6 @@ export const DataList = () => {
                         rowSx={getPostRowSx(selectedIds)}
                     >
                         {/*<TextField source="id" />*/}
-                        {/*<CheckField label="Bought"/>*/}
                         <TextField source="title"/>
                         <TextField source="amount"/>
                         <TextField source="unit"/>
