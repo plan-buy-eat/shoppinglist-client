@@ -1,6 +1,6 @@
 import { useMediaQuery, Theme } from "@mui/material";
-import { List, Datagrid, TextField, TextInput, BulkDeleteButton} from "react-admin";
-import { WithListContext } from 'react-admin';
+import { List, Datagrid, TextField, TextInput, useDelete, useRefresh, useRecordContext} from "react-admin";
+import { Identifier, RaRecord, WithListContext } from 'react-admin';
 import { Save } from '@mui/icons-material';
 
 const postFilters = [
@@ -13,7 +13,7 @@ const postFilters = [
 const PostBulkActionButtons = () => (
     <>
         {/* default bulk delete action */}
-        <BulkDeleteButton label="Save" icon={<Save/>} />
+        {/* <BulkDeleteButton label="Save" icon={<Save/>} /> */}
     </>
 );
 
@@ -26,25 +26,59 @@ const getPostRowSx = (selectedIds: any[])=> {
     };
 }
 
+function wait(milliseconds: number) {
+    return new Promise(resolve => setTimeout(resolve, milliseconds));
+}
+
+const SwitchButton = () => {
+    const record = useRecordContext();
+    const refresh = useRefresh();
+    const [deleteOne, { isLoading, error }] = useDelete(
+        'items',
+        { id: record.id, previousData: record }
+    );
+    const handleClick = async () => {
+        await deleteOne()
+        await wait(100)
+        await refresh()
+        return ""
+    }
+    if (error) { return <p>ERROR</p>; }
+    return <button disabled={isLoading} onClick={handleClick}>Switch</button>;
+};
+
+const postRowClick = (id: Identifier, resource: string, record: RaRecord) => {
+    // console.log(id);
+    // console.log(resource);
+    // console.log(record);
+    // const [deleteOne, { isLoading, error }] = useDelete(
+    //     'items',
+    //     { id: record.id, previousData: record }
+    // );
+    // return deleteOne().then(_ => "")
+    return "";
+}
+
 export const FullDataList = () => {
     const isSmall = useMediaQuery<Theme>((theme) => theme.breakpoints.down("sm"));
     return (
-        <List filters={postFilters} perPage={10}>
+        <List filters={postFilters} perPage={10} >
         {/* <InfiniteList filters={postFilters} perPage={10}> */}
             <WithListContext render={({ selectedIds }) =>
                 isSmall ? (
-                    <Datagrid
-                        bulkActionButtons={<PostBulkActionButtons />}
-                        rowClick="toggleSelection"
+                    <Datagrid 
+                        bulkActionButtons={false}
+                        rowClick={postRowClick}
                         rowSx={getPostRowSx(selectedIds)}
                     >
                         <TextField source="title"/>
                         <TextField source="amount"/>
+                        <SwitchButton/>
                     </Datagrid>
                 ) : (
                     <Datagrid
-                        bulkActionButtons={<PostBulkActionButtons />}
-                        rowClick="toggleSelection"
+                        bulkActionButtons={false}
+                        rowClick={postRowClick}
                         rowSx={getPostRowSx(selectedIds)}
                     >
                         {/*<TextField source="id" />*/}
@@ -52,6 +86,7 @@ export const FullDataList = () => {
                         <TextField source="amount"/>
                         <TextField source="unit"/>
                         <TextField source="shop"/>
+                        <SwitchButton/>
                     </Datagrid>
                 )}
             />
