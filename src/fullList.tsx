@@ -39,7 +39,7 @@ const SwitchButton = () => {
     );
     const handleClick = async () => {
         await deleteOne()
-        await wait(100)
+        await wait(300)
         await refresh()
         return ""
     }
