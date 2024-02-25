@@ -1,3 +1,4 @@
+import React, { useRef, forwardRef } from 'react';
 import { useMediaQuery, Theme } from "@mui/material";
 import { List, Datagrid, TextField, TextInput, useDelete, useRefresh, useRecordContext} from "react-admin";
 import { Identifier, RaRecord, WithListContext } from 'react-admin';
@@ -30,7 +31,7 @@ function wait(milliseconds: number) {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
 
-const SwitchButton = () => {
+const SwitchButton = forwardRef((props, ref) => {
     const record = useRecordContext();
     const refresh = useRefresh();
     const [deleteOne, { isLoading, error }] = useDelete(
@@ -44,10 +45,12 @@ const SwitchButton = () => {
         return ""
     }
     if (error) { return <p>ERROR</p>; }
-    return <button disabled={isLoading} onClick={handleClick}>Switch</button>;
-};
+    const c = encodeURIComponent(record.id.toString())
+    return <button {...props} className={"switchbutton switchbutton-" + c} ref={ref} onClick={handleClick}>{}</button>;
+});
 
-const postRowClick = (id: Identifier, resource: string, record: RaRecord) => {
+const getPostRowClick = (ref) => {
+const f = (id: Identifier, resource: string, record: RaRecord) => {
     // console.log(id);
     // console.log(resource);
     // console.log(record);
@@ -56,10 +59,20 @@ const postRowClick = (id: Identifier, resource: string, record: RaRecord) => {
     //     { id: record.id, previousData: record }
     // );
     // return deleteOne().then(_ => "")
+    const c = "switchbutton-"+encodeURIComponent(id.toString())
+    // console.log("***")
+    // console.log(c)
+    console.log(ref.current.getElementsByClassName(c)[0])
+    ref.current.getElementsByClassName(c)[0].click()
+    // ref.current.click()
+
     return "";
+}
+return f;
 }
 
 export const FullDataList = () => {
+    const ref = useRef(null);
     const isSmall = useMediaQuery<Theme>((theme) => theme.breakpoints.down("sm"));
     return (
         <List filters={postFilters} perPage={10} >
@@ -67,9 +80,18 @@ export const FullDataList = () => {
             <WithListContext render={({ selectedIds }) =>
                 isSmall ? (
                     <Datagrid 
+                        ref={ref}
                         bulkActionButtons={false}
-                        rowClick={postRowClick}
+                        rowClick={getPostRowClick(ref)}
                         rowSx={getPostRowSx(selectedIds)}
+                        sx = {{
+                            '& .switchbutton': {
+                                display: 'none',
+                            },
+                            '&:hover .switchbutton': {
+                                display: 'none',
+                            },
+                        }}
                     >
                         <TextField source="title"/>
                         <TextField source="amount"/>
@@ -77,9 +99,18 @@ export const FullDataList = () => {
                     </Datagrid>
                 ) : (
                     <Datagrid
+                        ref={ref}
                         bulkActionButtons={false}
-                        rowClick={postRowClick}
+                        rowClick={getPostRowClick(ref)}
                         rowSx={getPostRowSx(selectedIds)}
+                        sx = {{
+                            '& .switchbutton': {
+                                display: 'none',
+                            },
+                            '&:hover .switchbutton': {
+                                display: 'none',
+                            },
+                        }}
                     >
                         {/*<TextField source="id" />*/}
                         <TextField source="title"/>
