@@ -51,18 +51,7 @@ const SwitchButton = forwardRef((props, ref) => {
 
 const getPostRowClick = (ref) => {
 const f = (id: Identifier, resource: string, record: RaRecord) => {
-    // console.log(id);
-    // console.log(resource);
-    // console.log(record);
-    // const [deleteOne, { isLoading, error }] = useDelete(
-    //     'items',
-    //     { id: record.id, previousData: record }
-    // );
-    // return deleteOne().then(_ => "")
     const c = "switchbutton-"+encodeURIComponent(id.toString())
-    // console.log("***")
-    // console.log(c)
-    console.log(ref.current.getElementsByClassName(c)[0])
     ref.current.getElementsByClassName(c)[0].click()
     // ref.current.click()
 
