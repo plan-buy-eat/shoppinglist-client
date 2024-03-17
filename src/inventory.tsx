@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Create, Edit, SimpleForm, TextInput, DateInput, ReferenceManyField, 
+import { Create, Edit, SimpleForm, TextInput, DateTimeInput, ReferenceManyField, 
     Datagrid, TextField, DateField, EditButton, NumberInput,
     required } from 'react-admin';
 import { RichTextInput } from 'ra-input-rich-text';
@@ -12,7 +12,7 @@ export const InventoryCreate = (props) => (
             <TextInput source="unit" validate={[required()]} defaultValue="pc"/>
             <TextInput source="shop" multiline />
             <RichTextInput source="description" />
-            <DateInput source="when"/>
+            <DateTimeInput source="when"/>
         </SimpleForm>
     </Create>
 );
@@ -26,7 +26,7 @@ export const InventoryEdit = (props) => (
             <TextInput source="unit" validate={[required()]} defaultValue="pc"/>
             <TextInput source="shop" multiline />
             <RichTextInput source="description" />
-            <DateInput source="when"/>
+            <DateTimeInput source="when"/>
         </SimpleForm>
     </Edit>
 );
